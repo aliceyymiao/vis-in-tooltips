@@ -12,10 +12,10 @@ const msm = {
     marginLeft: 80
 }
 const small_msm = {
-    width: 300,
-    height: 300,
-    marginAll: 50,
-    marginLeft: 80
+    width: 400,
+    height: 400,
+    marginAll: 40,
+    marginLeft: 120
 }
 
 window.onload = function () {
@@ -30,6 +30,7 @@ window.onload = function () {
 
 function makeScatterPlot(csvData) {
     totalData = csvData;
+    totalData = totalData.filter((data) => {return data.fertility != "NA" && data.life_expectancy != "NA"})
     data = csvData.filter((data) => {return data.fertility != "NA" && data.life_expectancy != "NA"})
     data = data.filter(function(d) {return d["year"] == "1980";});
 
@@ -71,13 +72,13 @@ function makeScatterPlot(csvData) {
       .text('Life Expectancy');
 
     toolChart.append('text')
-    .attr('x', 145)
+    .attr('x', 200)
     .attr('y', 25)
     .style('font-size', '10pt')
     .text("Year");
 
     toolChart.append('text')
-    .attr('transform', 'translate(25, 175)rotate(-90)')
+    .attr('transform', 'translate(25, 220)rotate(-90)')
     .style('font-size', '10pt')
     .text("Population");
   }
@@ -216,7 +217,7 @@ function makeScatterPlot(csvData) {
     // plot y-axis at the left of SVG
     let yAxis = d3.axisLeft().scale(yScale);
     svgContainer.append('g')
-      .attr('transform', 'translate(80, 0)')
+      .attr('transform', 'translate(' + msm.marginLeft + ', 0)')
       .call(yAxis);
 
           // return mapping and scaling functions
